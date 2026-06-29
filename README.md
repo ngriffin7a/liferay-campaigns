@@ -13,6 +13,12 @@ Liferay calls over an OAuth2 user-agent application and reads all of its
 deployment-specific settings from **environment variables** so the same build can
 be promoted across environments without rebuilding.
 
+## Screenshots
+
+![Campaign scheduler list](screenshots/campaign-scheduler-list.png)
+
+![Campaign details](screenshots/campaign-details.png)
+
 ## Client Extension
 
 | Extension | Purpose |
