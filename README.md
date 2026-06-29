@@ -30,6 +30,8 @@ be promoted across environments without rebuilding.
 A campaign reaches recipients in one of two ways, both running the same
 server-side send routine:
 
+![Campaign send sequence diagram](screenshots/campaign-sequence-diagram.gif)
+
 - **Scheduled** — every 60 seconds the microservice polls Liferay (Basic Auth as
   `LIFERAY_EMAIL` / `LIFERAY_PASSWORD`) for campaigns whose `scheduledSendDate`
   falls in the current minute, and sends them.
