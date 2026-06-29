@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+assemble:
+    -   fromTask: bootJar
+liferay-campaigns-oauth-application-user-agent:
+    .serviceAddress: localhost:58081
+    .serviceScheme: http
+    name: Campaigns OAuth Application User Agent
+    scopes:
+        -   c_newsarticle.everything.read
+        -   c_campaign.everything.read
+        -   Liferay.Headless.Admin.User.everything.read
+        -   Liferay.Object.Admin.REST.everything.read
+        -   Liferay.Portal.Search.REST.everything
+    type: oAuthApplicationUserAgent

@@ -1,0 +1,9 @@
+{
+  "configurationPath": "configuration.json",
+  "jsPath": "main.js",
+  "htmlPath": "index.html",
+  "cssPath": "main.css",
+  "icon": "code",
+  "name": "Campaign Scheduler",
+  "type": "component"
+}

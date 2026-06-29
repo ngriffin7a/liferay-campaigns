@@ -1,0 +1,71 @@
+{
+    "fieldSets": [
+        {
+            "fields": [
+                {
+                    "dataType": "string",
+                    "defaultValue": "25",
+                    "label": "Page Size",
+                    "name": "pageSize",
+                    "type": "select",
+                    "typeOptions": {
+                        "validValues": [
+                            {
+                                "value": "25"
+                            },
+                            {
+                                "value": "50"
+                            },
+                            {
+                                "value": "75"
+                            },
+                            {
+                                "value": "100"
+                            },
+                            {
+                                "value": "150"
+                            },
+                            {
+                                "value": "200"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "dataType": "string",
+                    "defaultValue": "liferay-campaigns-oauth-application-user-agent",
+                    "label": "User Agent ERC",
+                    "name": "userAgentERC",
+                    "type": "text"
+                },
+                {
+                    "dataType": "string",
+                    "defaultValue": "http",
+                    "label": "protocol",
+                    "name": "protocol",
+                    "type": "text"
+                },
+                {
+                    "dataType": "string",
+                    "defaultValue": "localhost",
+                    "label": "host-name",
+                    "name": "hostname",
+                    "type": "text"
+                },
+                {
+                    "dataType": "string",
+                    "defaultValue": "58081",
+                    "label": "port",
+                    "name": "port",
+                    "type": "text"
+                },
+                {
+                    "defaultValue": false,
+                    "label": "Bypass Same-Origin Restriction",
+                    "name": "bypassSameOrigin",
+                    "type": "checkbox"
+                }
+            ]
+        }
+    ]
+}

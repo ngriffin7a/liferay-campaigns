@@ -1,0 +1,41 @@
+{
+  "pageElement": {
+    "pageElements": [
+      {
+        "definition": {
+          "indexed": true,
+          "layout": {}
+        },
+        "id": "home-section",
+        "pageElements": [
+          {
+            "definition": {
+              "indexed": true,
+              "layout": {
+                "widthType": "Fixed"
+              }
+            },
+            "id": "home-fixed-section",
+            "pageElements": [
+              {
+                "definition": {
+                  "fragment": {
+                    "key": "campaign-scheduler"
+                  },
+                  "fragmentConfig": {},
+                  "fragmentFields": [],
+                  "indexed": true
+                },
+                "id": "home-campaign-scheduler",
+                "type": "Fragment"
+              }
+            ],
+            "type": "Section"
+          }
+        ],
+        "type": "Section"
+      }
+    ],
+    "type": "Root"
+  }
+}

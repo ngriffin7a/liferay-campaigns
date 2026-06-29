@@ -1,0 +1,4 @@
+/* Vertical dividers between the column sections of the New/Edit Campaign modal. */
+.fragment-campaign-scheduler .campaign-modal-divider {
+	border-right: 1px solid var(--color-neutral-3);
+}

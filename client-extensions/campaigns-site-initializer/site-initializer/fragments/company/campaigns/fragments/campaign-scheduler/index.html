@@ -1,0 +1,284 @@
+<div class="fragment-campaign-scheduler"
+     data-user-agent-erc="${configuration.userAgentERC!"liferay-campaigns-oauth-application-user-agent"}"
+     data-bypass-same-origin="${(configuration.bypassSameOrigin!false)?c}">
+    <div class="fds">
+        <div class="data-set-wrapper visualization-mode-table" data-testid="visualization-mode-table">
+            <div class="data-set data-set-fluid">
+                <div class="management-bar-wrapper">
+                    <div class="container-fluid d-flex align-items-center management-bar">
+                        <div class="container-fluid ml-2 navbar navbar-expand-md" data-qa-id="managementToolbar">
+                            <ul class="navbar-nav"></ul>
+                            <div class="navbar-form navbar-form-autofit navbar-overlay navbar-overlay-sm-down">
+                                <div class="container-fluid container-fluid-max-xxxl">
+                                    <form role="search" id="campaign-search-form">
+                                        <div class="input-group">
+                                            <div class="input-group-item">
+                                                <input id="campaign-search-input" aria-label="Search" placeholder="Search" class="form-control input-group-inset input-group-inset-after" type="search" value="">
+                                                <div class="input-group-inset-item input-group-inset-item-after">
+                                                    <button class="btn btn-unstyled" type="submit" aria-label="Search">
+                                                        <svg class="lexicon-icon lexicon-icon-search" role="presentation">
+                                                            <use href="/o/dialect-theme/images/clay/icons.svg#search"></use>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <ul class="navbar-nav">
+                                <li class="nav-item navbar-breakpoint-d-none">
+                                    <button class="nav-link nav-link-monospaced btn btn-unstyled" type="button" aria-label="Search">
+                                        <svg class="lexicon-icon lexicon-icon-search" role="presentation">
+                                            <use href="/o/dialect-theme/images/clay/icons.svg#search"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <button class="btn btn-primary nav-btn px-3 btn btn-primary btn-new-campaign d-none" type="button" data-testid="fdsCreationActionButton" data-tooltip-align="top" aria-label="Add" title="Add">New</button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid mt-3">
+                    <div class="data-set-content-wrapper">
+                        <div class="table-responsive">
+                            <table id="campaignTable" class="table table-autofit table-hover table-list table-head-bordered table-striped table-valign-middle">
+                                <thead id="campaignTableHead"></thead>
+                                <tbody id="campaignTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="data-set-pagination-wrapper">
+                        <div class="pagination-bar" id="campaignPaginationBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- Campaign Modal -->
+	<div class="modal fade" id="newCampaignModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header border-bottom-0">
+					<h5 class="modal-title font-weight-bold">New Campaign</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body p-4">
+					<form id="newCampaignForm">
+						<div class="row">
+							<div class="col-md-3 campaign-modal-divider">
+								<h6 class="font-weight-bold text-uppercase pb-2 mb-3 border-bottom">Campaign Details</h6>
+								<div class="form-group">
+									<label for="campaignTitle" class="small font-weight-bold uppercase">Campaign Title</label>
+									<input type="text" class="form-control" id="campaignTitle" required>
+								</div>
+								<div class="form-group">
+									<label for="campaignScheduleDateTime" class="small font-weight-bold uppercase">Schedule Date Time</label>
+									<input type="datetime-local" class="form-control" id="campaignScheduleDateTime" required>
+								</div>
+							</div>
+							<div class="col-md-3 campaign-modal-divider">
+								<h6 class="font-weight-bold text-uppercase pb-2 mb-3 border-bottom">Content Selection</h6>
+								<div class="form-group">
+									<label class="small font-weight-bold uppercase d-block">Content Selection Method</label>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" class="custom-control-input" id="campaignSelectModeType" name="campaignSelectMode" value="type" checked>
+										<label class="custom-control-label" for="campaignSelectModeType">By Content Type</label>
+									</div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" class="custom-control-input" id="campaignSelectModeBlueprint" name="campaignSelectMode" value="blueprint">
+										<label class="custom-control-label" for="campaignSelectModeBlueprint">By Blueprint</label>
+									</div>
+								</div>
+								<div class="form-group" id="campaignContentTypeGroup">
+									<label for="campaignObjectDefinitionId" class="small font-weight-bold uppercase">Content Type</label>
+									<select class="form-control" id="campaignObjectDefinitionId">
+										<option value="" selected>Select a Content Type...</option>
+									</select>
+								</div>
+								<div class="form-group" id="campaignSpaceGroup">
+									<label for="campaignSpaceScope" class="small font-weight-bold uppercase">Space</label>
+									<select class="form-control" id="campaignSpaceScope" disabled>
+										<option value="" selected>All Spaces</option>
+									</select>
+								</div>
+								<div class="form-group" id="campaignSortGroup">
+									<label for="campaignSortBy" class="small font-weight-bold uppercase">Sort By</label>
+									<select class="form-control" id="campaignSortBy" disabled>
+										<option value="title:asc" selected>Title (A–Z)</option>
+										<option value="dateCreated:desc">Create Date (Newest First)</option>
+										<option value="dateModified:desc">Modified Date (Newest First)</option>
+									</select>
+								</div>
+								<div class="form-group d-none" id="campaignBlueprintGroup">
+									<label for="campaignBlueprintErc" class="small font-weight-bold uppercase">Blueprint</label>
+									<select class="form-control" id="campaignBlueprintErc">
+										<option value="" selected>Select a Blueprint...</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="campaignObjectEntryId" class="small font-weight-bold uppercase">Content Title</label>
+									<select class="form-control" id="campaignObjectEntryId" disabled>
+										<option value="" selected>Select a Content Type first...</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h6 class="font-weight-bold text-uppercase pb-2 mb-3 border-bottom">Recipients</h6>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group pb-2">
+											<label class="small font-weight-bold uppercase">Recipient User Groups</label>
+											<input type="hidden" id="campaignRecipientUserGroupIds">
+											<div class="input-group mb-2">
+												<div class="input-group-item">
+													<input type="text" class="form-control input-group-inset input-group-inset-after" id="campaignUserGroupSearch" placeholder="Search user groups by name...">
+													<div class="input-group-inset-item input-group-inset-item-after">
+														<button class="btn btn-unstyled d-none" type="button" id="clearUserGroupSearchBtn" aria-label="Clear">
+															<svg class="lexicon-icon lexicon-icon-times" role="presentation">
+																<use href="/o/dialect-theme/images/clay/icons.svg#times"></use>
+															</svg>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div id="campaignUserGroupList" class="clay-scroll-list border rounded p-3 bg-white" style="border-color: var(--color-neutral-1) !important;">
+												<div class="text-muted small p-1">Loading user groups...</div>
+											</div>
+											<small class="form-text mt-1"><span id="selectedUserGroupsCount">0</span> groups selected</small>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group pb-2">
+											<label class="small font-weight-bold uppercase">Recipient Users</label>
+											<input type="hidden" id="campaignRecipientUserIds">
+											<div class="input-group mb-2">
+												<div class="input-group-item">
+													<input type="text" class="form-control input-group-inset input-group-inset-after" id="campaignUserSearch" placeholder="Search users by name or email...">
+													<div class="input-group-inset-item input-group-inset-item-after">
+														<button class="btn btn-unstyled d-none" type="button" id="clearUserSearchBtn" aria-label="Clear">
+															<svg class="lexicon-icon lexicon-icon-times" role="presentation">
+																<use href="/o/dialect-theme/images/clay/icons.svg#times"></use>
+															</svg>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div id="campaignUserList" class="clay-scroll-list border rounded p-3 bg-white" style="border-color: var(--color-neutral-1) !important;">
+												<div class="text-muted small p-1">Loading users...</div>
+											</div>
+											<small class="form-text mt-1"><span id="selectedUsersCount">0</span> users selected</small>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="campaignRecipientEmailAddresses" class="small font-weight-bold uppercase">Additional Recipient Email Addresses</label>
+											<input type="text" class="form-control" id="campaignRecipientEmailAddresses" placeholder="Comma-separated list (optional)">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="campaignSegmentId" class="small font-weight-bold uppercase">Segment</label>
+											<select class="form-control" id="campaignSegmentId">
+												<option value="" selected>Select a Segment...</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-12">
+								<button type="submit" class="btn btn-primary btn-block">Create Campaign</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="module">
+    import * as OAuth2 from '@liferay/oauth2-provider-web/client';
+
+    var panel = document.querySelector('.fragment-campaign-scheduler');
+
+    if (panel) {
+        var userAgentERC = panel.dataset.userAgentErc || 'liferay-campaigns-oauth-application-user-agent';
+
+        // FromUserAgentApplication is async (returns a Promise) in 2025.Q2+.
+        // The deprecated global Liferay.OAuth2Client is no longer available
+        // without a feature flag, so the client is discovered by importing the
+        // OAuth2 provider module directly. The resolved client is wrapped in a
+        // Promise-based apiFetch and exposed on the fragment element / window so
+        // the classic index.js can consume it.
+        //
+        // client.fetch() rejects any absolute URL that does not start with the
+        // OAuth2 application's homePageURL ("This client only supports calls to
+        // ..."). On PaaS the homePageURL resolves to the microservice's public
+        // URL, so the call matches and client.fetch() works (with server-side
+        // CORS scoped to *.lfr.cloud). On localhost the microservice is reached
+        // on a different port than the registered homePageURL, so client.fetch()
+        // trips that gate — enable "Bypass Same-Origin Restriction" to extract
+        // the token manually and send it via Liferay.Util.fetch instead. The
+        // microservice's CORS config (CORS_ALLOWED_ORIGIN_PATTERNS, * locally)
+        // still authorizes the actual cross-origin request.
+        var clientPromise = OAuth2.FromUserAgentApplication(userAgentERC);
+
+        var bypassSameOrigin = panel.dataset.bypassSameOrigin === 'true';
+
+        var apiFetch = function (url, options) {
+            options = options || {};
+
+            return clientPromise.catch(function (err) {
+                // FromUserAgentApplication often rejects with a non-Error object.
+                var errMsg = "Unknown error";
+                if (err && err.message) {
+                    errMsg = err.message;
+                } else if (err && typeof err === 'object') {
+                    try { errMsg = JSON.stringify(err); } catch (e) { errMsg = String(err); }
+                } else if (err !== undefined) {
+                    errMsg = String(err);
+                }
+                throw new Error("OAuth2 Client Initialization Failed: " + errMsg);
+            }).then(function (client) {
+                if (bypassSameOrigin) {
+                    console.debug('Campaign Scheduler: Bypassing same-origin restriction via manual token extraction.');
+                    return client._getOrRequestToken().then(function (tokenData) {
+                        var token = tokenData && tokenData.access_token ? tokenData.access_token : null;
+                        if (token) {
+                            options.headers = options.headers || {};
+                            options.headers['Authorization'] = 'Bearer ' + token;
+                        }
+                        return Liferay.Util.fetch(url, options);
+                    });
+                } else {
+                    return client.fetch(url, options).catch(function (err) {
+                        if (!err || !err.message) {
+                            var msg = "Cross-origin request blocked by Liferay OAuth2Client fetch. To fix this, enable 'Bypass Same-Origin Restriction' in the fragment configuration.";
+                            console.error(msg, err);
+                            throw new Error(msg);
+                        }
+                        throw err;
+                    });
+                }
+            });
+        };
+
+        panel._apiFetch = apiFetch;
+        window.__campaignsApiFetch = apiFetch;
+    }
+</script>

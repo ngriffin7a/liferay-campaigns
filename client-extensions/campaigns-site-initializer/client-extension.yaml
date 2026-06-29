@@ -1,0 +1,23 @@
+assemble:
+    - from: site-initializer
+      into: site-initializer
+
+campaigns-site-initializer:
+    description: Liferay Campaigns -- Site Initializer (fragments in global scope).
+    name: Liferay Campaigns
+    oAuthApplicationHeadlessServer: campaigns-site-initializer-oauth-application-headless-server
+    # Must target a regular site, never a system group. Running a site
+    # initializer against a Liferay system group (Global, Guest, or Control
+    # Panel) triggers a NullPointerException in SiteResourceImpl._updateGroup
+    # (LPD-95623), so this points at a dedicated "Campaigns" site.
+    siteExternalReferenceCode: L_CAMPAIGNS
+    siteName: Campaigns
+    type: siteInitializer
+
+campaigns-site-initializer-oauth-application-headless-server:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: Liferay Campaigns Site Initializer OAuth Application Headless Server
+    scopes:
+        - Liferay.Headless.Site.everything
+    type: oAuthApplicationHeadlessServer
